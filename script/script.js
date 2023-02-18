@@ -13,7 +13,6 @@ burger.addEventListener('click', ()=>{
 window.onresize = () => {
     let viewPortWidth = window.innerWidth;
     if(viewPortWidth > 719){
-        console.log("Changing nav")
         nav.style.transition = "none";
         nav.classList.remove('nav-active');
         burger.classList.remove('toggle');
