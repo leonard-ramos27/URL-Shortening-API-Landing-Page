@@ -27,12 +27,10 @@ body{
 
 main{
     overflow-x: hidden;
-    background-color: aliceblue;
 }
 
 footer{
-    height: 100px;
-    background-color: lightseagreen;
+    background-color: var(--dark-blue);
 }
 
 input, button{
@@ -426,6 +424,83 @@ header{
     font-weight: 700;
 }
 
+/* FOOTER SECTION */
+
+.footer-wrapper{
+    padding: 3rem 1.3rem 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer-wrapper img{
+    margin-bottom: 1rem;
+}
+
+.footer-nav{
+    gap: .5rem;
+}
+
+.footer-nav ul{
+    justify-content: center;
+    align-items: center;
+    gap: .2rem;
+}
+
+.footer-nav h4{
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.footer-nav li{
+    list-style: none;
+}
+
+.footer-nav a{
+    text-decoration: none;
+    color: var(--grayish-violet);
+    font-size: .9rem;
+    font-weight: 500;
+    line-height: .8rem;
+    transition: color .3s ease;
+}
+
+.footer-nav a:hover{
+    color: var(--cyan);
+}
+
+.social-links{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+svg path{
+    transition: fill .3s ease;
+}
+
+svg:hover path{
+    fill: var(--cyan);
+}
+
+.attribution{
+    padding: 1rem 1rem;
+}
+
+.attribution p{
+    text-align: center;
+    color: var(--grayish-violet);
+    font-size: .7rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+
+.attribution a{
+    text-decoration: none;
+    color: var(--cyan);
+}
 
 @media screen and (min-width: 45em) {
 
@@ -608,6 +683,51 @@ header{
     .boost-links-section p{
         font-size: 1.9rem;
     }
+
+    /*FOOTER SECTION*/
+
+    .footer-wrapper{
+        padding: 3rem 2rem 2rem;
+        max-width: 1110px;
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: 1fr auto auto auto auto;
+        grid-template-areas: 
+        "img features resources company socials";
+        gap: 1.5rem;
+        align-items: start;
+    }
+
+    .footer-nav, .footer-nav ul{
+        align-items: start;
+    }
+
+    .footer-wrapper img{
+        grid-area: img;
+    }
+
+    .footer-features{
+        grid-area: features;
+    }
+
+    .footer-resources{
+        grid-area: resources;
+    }
+
+    .footer-company{
+        grid-area: company;
+    }
+
+    .social-links{
+        grid-area: socials;
+        margin-top: unset;
+        margin-left: 1rem;
+    }
+
+    .attribution p{
+        font-size: 1rem;
+    }
+
 }
 
 @media screen and (min-width: 60em) {
@@ -700,6 +820,29 @@ header{
         right: unset;
         transform: unset;
         left: 10%;
+    }
+
+    footer{
+        padding: 0 2rem;
+    }
+
+    .footer-wrapper{
+        padding: 4.75rem 0 4.75rem;
+        gap: 3.5rem;
+    }
+
+    .footer-nav{
+        gap: 1rem;
+    }
+
+    .footer-nav h4{
+        font-size: 1.3rem;
+    }
+
+    .footer-nav a{
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.9rem;
     }
 
 }
