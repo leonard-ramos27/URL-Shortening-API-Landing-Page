@@ -19,7 +19,7 @@
 <body>
   <header>
     <div class="header-wrapper">
-      <a href="#">
+      <a href="#" class="logo-container">
         <img src="./images/logo.svg" alt="Shortly Logo" class="logo">
       </a>
       <nav id="nav-bar" class="nav-bar">
@@ -52,22 +52,61 @@
       </div>
     </section>
     <section class="links-statistics-section">
-      <div class="links-statistics-wrapper">
+      <div class="links-statistics-wrapper flex-column">
         <section class="shorten-link-section">
           <form action="#" class="form-enter-link">
             <input type="text" class="txt-enter-link" placeholder="Shorten a link here...">
             <button class="green-button btn-enter-link">Shorten It!</button>
           </form>
+          <!--<section class="section-display-link">
+            <p class="link-original">https://www.frontendmentor.io</p>
+            <p class="link-shortened">https://reLink/k4lkyk</p>
+            <button class="green-button btn-copy-link">Copy</button>
+          </section>
           <section class="section-display-link">
             <p class="link-original">https://www.frontendmentor.io</p>
             <p class="link-shortened">https://reLink/k4lkyk</p>
             <button class="green-button btn-copy-link">Copy</button>
           </section>
+          <section class="section-display-link">
+            <p class="link-original">https://www.frontendmentor.io</p>
+            <p class="link-shortened">https://reLink/k4lkyk</p>
+            <button class="green-button btn-copy-link">Copy</button>
+          </section>-->
         </section>
-        <section class="statistics-section">
-          
+        <section class="statistics-section flex-column">
+          <div class="statistics-main-text flex-column">
+            <h2 class="center-align black-heading">Advanced Statistics</h2>
+            <p class="center-align gray-text">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+          </div>
+          <div class="statistics-wrapper">
+            <section class="statistics-container">
+              <div class="statistics-img-container">
+                <img src="./images/icon-brand-recognition.svg" alt="Brand Recognition Icon">
+              </div>
+              <h3 class="black-heading">Brand Recognition</h3>
+              <p class="gray-text">Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.</p>
+            </section>
+            <section class="statistics-container">
+              <div class="statistics-img-container">
+                <img src="./images/icon-detailed-records.svg" alt="Detailed Records Icon">
+              </div>
+              <h3 class="black-heading">Detailed Records</h3>
+              <p class="gray-text">Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.</p>
+            </section>
+            <section class="statistics-container">
+              <div class="statistics-img-container">
+                <img src="./images/icon-fully-customizable.svg" alt="Fully Customizable Icon">
+              </div>
+              <h3 class="black-heading">Fully Customizable</h3>
+              <p class="gray-text">Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
+            </section>
         </section>
       </div>
+    </section>
+    <section class="boost-links-section">
+      <p class="center-align">Boost your links today</p>
+      <button class="green-button btn-get-started">Get Started</button>
     </section>
   </main>
   <footer></footer>

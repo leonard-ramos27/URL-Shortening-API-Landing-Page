@@ -18,3 +18,11 @@ window.onresize = () => {
         burger.classList.remove('toggle');
     }
 }
+
+function updateStatisticsSectionHeight(){
+    const LinksStatisticsSection = document.querySelector('.links-statistics-section')
+    const LinksStatisticWrapper = document.querySelector('.links-statistics-wrapper')
+    console.log(LinksStatisticsSection, LinksStatisticWrapper, LinksStatisticWrapper.offsetHeight)
+}
+
+updateStatisticsSectionHeight()
