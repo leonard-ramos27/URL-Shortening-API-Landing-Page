@@ -1,3 +1,5 @@
+//  **  MOBILE BURGER MENU  **
+
 const burger = document.querySelector('.burger');
 const nav = document.getElementById('nav-bar');
 
@@ -19,16 +21,17 @@ window.addEventListener('resize', ()=>{
 })
 
 
+//  **  SHORTEN LINK FUNCTIONS  **
 
 const formShortenLink = document.getElementById('form-shorten-link')
 let linksArray = []
-
 formShortenLink.addEventListener('submit', formSubmitted)
 
 function formSubmitted(event){
     event.preventDefault()
     const txtLink = document.getElementById('txt-enter-link')
     const formWarning = document.querySelector('.form-warning')
+    //Check if link is empty
     if(txtLink.value.trim() !== ""){
         txtLink.classList.remove('invalid-link')
         formWarning.style.display = "none"
@@ -47,31 +50,36 @@ async function createLink(link){
         if(data.ok){
             addLink(data.result)
         }else{
+            console.log(data)
             throw data.error_code
         }
     } catch (error) {
+        //If Error code is 2, user entered an invalid link 
         if(error == 2){
-            console.log('Cannot Create Link. Please check that the URL is valid.')
+            alert('Cannot Create Link. Please check that the URL is valid.')
         }else{
-            console.log('Cannot Create Link. Please check your network connection or ensure that the URL is valid')
+            alert('Cannot Create Link.')
+            console.log(error)
         }
     }
 }
 
 function addLink(data){
+    //Add the response to array
     linksArray.push(new function(){
         this.code = data.code
         this.short_link = data.short_link
         this.full_short_link = data.full_short_link
         this.original_link = data.original_link
     })
-    console.log(linksArray)
+    //Clear Textbox and create section with the new link
     document.getElementById('txt-enter-link').value = ""
     const shortenLinksSection = document.getElementById('shorten-links-section')
     shortenLinksSection.appendChild(createLinkSection(data))
 }
 
 function createLinkSection(data){
+    //Create new section with the full link, short link and button to copy
     const newSection = document.createElement('section')
     newSection.classList.add('section-display-link')
     newSection.dataset.linkCode = data.code
@@ -93,7 +101,10 @@ function createLinkSection(data){
 }
 
 
+//   **  COPY LINK FUNCTIONS  **
+
 function btnCopyClicked(event){
+    //Get Code and pass the full short link
     const linkCode = event.target.closest('.section-display-link').dataset.linkCode
     linksArray.forEach(item => {
         if(item.code == linkCode){
@@ -105,6 +116,7 @@ function btnCopyClicked(event){
 
 async function copyLink(link, btnToChange){
     try {
+        //Copy the link to clipboard then change the Button color
         await navigator.clipboard.writeText(link);
         changeBtnCopyColor(btnToChange)
     } catch (error) {
@@ -113,11 +125,13 @@ async function copyLink(link, btnToChange){
 }
 
 function changeBtnCopyColor(btnToChange){
+    //Remove copied class from other button
     const btnCopy = document.querySelectorAll('.btn-copy-link')
     btnCopy.forEach(btn => {
         btn.classList.remove('btn-copy-clicked')
         btn.innerText = "Copy"
     })
+    //Change Button color and text
     btnToChange.classList.add('btn-copy-clicked')
     btnToChange.innerText = "Copied!"
 }
