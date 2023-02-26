@@ -55,6 +55,10 @@ p{
     overflow-wrap: break-word;
 }
 
+ul li{
+    list-style: none;
+}
+
 .nav-text{
     text-decoration: none;
     color: white;
@@ -548,7 +552,11 @@ svg:hover path{
         max-width: 1110px;
         margin-inline: auto;
         justify-content: start;
-        gap: 3rem;
+        gap: 2rem;
+    }
+
+    .nav-primary{
+        flex-basis: 100%;
     }
 
     .nav-bar, .main-nav, .div-login-signup{
@@ -558,7 +566,7 @@ svg:hover path{
     }
 
     .nav-bar{
-        flex-basis: 100%;
+        /* flex-basis: 100%; */
         justify-content: space-between;
         align-items: center;
     }
@@ -768,6 +776,10 @@ svg:hover path{
 }
 
 @media screen and (min-width: 60em) {
+
+    .header-wrapper{
+        gap: 3rem;
+    }
 
     .hero-wrapper{
         gap: 3rem;

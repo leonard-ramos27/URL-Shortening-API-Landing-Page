@@ -9,6 +9,11 @@ burger.addEventListener('click', ()=>{
     nav.classList.toggle('nav-active'); 
     /*burger animation */
     burger.classList.toggle('toggle');
+    if(burger.ariaExpanded == "true"){
+        burger.ariaExpanded = "false"
+    }else{
+        burger.ariaExpanded = "true"
+    } 
 });
 
 window.addEventListener('resize', ()=>{
@@ -17,6 +22,7 @@ window.addEventListener('resize', ()=>{
         nav.style.transition = "none";
         nav.classList.remove('nav-active');
         burger.classList.remove('toggle');
+        burger.ariaExpanded = "false"
     }
 })
 
@@ -58,8 +64,7 @@ async function createLink(link){
         if(error == 2){
             alert('Cannot Create Link. Please check that the URL is valid.')
         }else{
-            alert('Cannot Create Link.')
-            console.log(error)
+            alert('Cannot Create Link. Server might be down or kindly check your network connection.')
         }
     }
 }
@@ -76,6 +81,7 @@ function addLink(data){
     document.getElementById('txt-enter-link').value = ""
     const shortenLinksSection = document.getElementById('shorten-links-section')
     shortenLinksSection.appendChild(createLinkSection(data))
+    updateLocalData()
 }
 
 function createLinkSection(data){
@@ -136,4 +142,20 @@ function changeBtnCopyColor(btnToChange){
     btnToChange.innerText = "Copied!"
 }
 
+
+//  **  LOCAL STORAGE FUNCTIONS  **
+
+getLocalData()
+
+function getLocalData(){
+    if(localStorage.getItem("shortlyLinks" !== null)){
+        linksArray = JSON.parse(localStorage.getItem("shortlyLinks"))
+    }
+}
+
+function updateLocalData(){
+    if(linksArray !== null){
+        localStorage.setItem("shortlyLinks", JSON.stringify(linksArray))
+    }
+}
 
