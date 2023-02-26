@@ -175,7 +175,8 @@ header{
     align-self: flex-start;
 }
 
-.burger div{
+.burger span{
+    display: block;
     width: 1.5rem;
     height: .22rem;
     margin: .3rem;
