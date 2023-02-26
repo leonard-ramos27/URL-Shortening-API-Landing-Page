@@ -148,9 +148,17 @@ function changeBtnCopyColor(btnToChange){
 getLocalData()
 
 function getLocalData(){
-    if(localStorage.getItem("shortlyLinks" !== null)){
+    if(localStorage.getItem("shortlyLinks") !== null){
         linksArray = JSON.parse(localStorage.getItem("shortlyLinks"))
+        displayLinks()
     }
+}
+
+function displayLinks(){
+    const shortenLinksSection = document.getElementById('shorten-links-section')
+    linksArray.forEach(link => { 
+        shortenLinksSection.appendChild(createLinkSection(link))
+    })
 }
 
 function updateLocalData(){
