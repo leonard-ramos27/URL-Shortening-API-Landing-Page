@@ -51,13 +51,21 @@ function formSubmitted(event){
 
 async function createLink(link){
     try {
-        const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${link}`)
-        const data = await response.json()
-        if(data.ok){
-            addLink(data.result)
-        }else{
-            console.log(data)
-            throw data.error_code
+        const response = await fetch(
+            "https://corsproxy.io/?"+"https://cleanuri.com/api/v1/shorten", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({
+                url: link,
+            })
+        })
+        if (response.ok) {
+            const data = await response.json();
+            addLink(data.result_url, link)
+        } else {
+            throw new Error("Failed to shorten URL");
         }
     } catch (error) {
         //If Error code is 2, user entered an invalid link 
@@ -69,33 +77,31 @@ async function createLink(link){
     }
 }
 
-function addLink(data){
+function addLink(short_link, original_link){
     //Add the response to array
     linksArray.push(new function(){
-        this.code = data.code
-        this.short_link = data.short_link
-        this.full_short_link = data.full_short_link
-        this.original_link = data.original_link
+        this.short_link = short_link
+        this.original_link = original_link
     })
     //Clear Textbox and create section with the new link
     document.getElementById('txt-enter-link').value = ""
     const shortenLinksSection = document.getElementById('shorten-links-section')
-    shortenLinksSection.appendChild(createLinkSection(data))
+    shortenLinksSection.appendChild(createLinkSection(short_link, original_link))
     updateLocalData()
 }
 
-function createLinkSection(data){
+function createLinkSection(short_link, original_link){
     //Create new section with the full link, short link and button to copy
     const newSection = document.createElement('section')
     newSection.classList.add('section-display-link')
-    newSection.dataset.linkCode = data.code
+    newSection.dataset.originalLink = original_link
     const originalLink = document.createElement('p')
     originalLink.classList.add('link-original')
-    originalLink.innerText = data.original_link
+    originalLink.innerText = original_link
     newSection.appendChild(originalLink)
     const shortenedLink = document.createElement('p')
     shortenedLink.classList.add('link-shortened')
-    shortenedLink.innerText = data.short_link
+    shortenedLink.innerText = short_link
     newSection.appendChild(shortenedLink)
     const btnCopy = document.createElement('button')
     btnCopy.classList.add('green-button')
@@ -111,10 +117,10 @@ function createLinkSection(data){
 
 function btnCopyClicked(event){
     //Get Code and pass the full short link
-    const linkCode = event.target.closest('.section-display-link').dataset.linkCode
+    const originalLink = event.target.closest('.section-display-link').dataset.originalLink
     linksArray.forEach(item => {
-        if(item.code == linkCode){
-            copyLink(item.full_short_link, event.target)
+        if(item.original_link == originalLink){
+            copyLink(item.short_link, event.target)
         }
     })
     
@@ -157,7 +163,7 @@ function getLocalData(){
 function displayLinks(){
     const shortenLinksSection = document.getElementById('shorten-links-section')
     linksArray.forEach(link => { 
-        shortenLinksSection.appendChild(createLinkSection(link))
+        shortenLinksSection.appendChild(createLinkSection(link.short_link, link.original_link))
     })
 }
 
